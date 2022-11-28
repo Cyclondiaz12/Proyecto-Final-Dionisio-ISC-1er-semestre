@@ -1,0 +1,145 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author oswal
+ */
+import java.util.Scanner;
+public class Cuestionario {
+    public static void main(String[] args) {
+        Pregunta[] preguntas = {
+            new Pregunta("1. Compañero que nunca aparece en clase", new Respuesta[] {
+                    new Respuesta("Tadeo", 'A', false),
+                    new Respuesta("Jan", 'B', true),
+                    new Respuesta("Gamas", 'C', false)
+            }),
+            new Pregunta("2. Las tortas de Oswaldo cuestan 35 pesos", new Respuesta[] {
+                    new Respuesta("Verdadero", 'A', false),
+                    new Respuesta("Falso", 'B', true),
+            }),
+            new Pregunta("3. Compañero que al inicio se le nombraba por su nombre más la palabra <kids>", new Respuesta[] {
+                    new Respuesta("Piña", 'A', false),
+                    new Respuesta("Villa", 'B', false),
+                    new Respuesta("Tadeo", 'C', true),
+                    new Respuesta("Gustavo", 'D', false),
+            }),
+            new Pregunta("4. ¿Cuál de los siguientes maestros es el más GOD?", new Respuesta[] {
+                    new Respuesta("Mayra", 'A', false),
+                    new Respuesta("Dionisio", 'B', true),
+                     new Respuesta("Rogelio", 'C', false),
+                    new Respuesta("Arroyo", 'D', false),
+            }),
+            new Pregunta("5. ¿Quién es el papá de Tadeo?", new Respuesta[] {
+                    new Respuesta("Domínguez", 'A', false),
+                    new Respuesta("Freddy", 'B', false),
+                    new Respuesta("Gamas", 'C', false),
+                    new Respuesta("Oshler", 'D', true),
+            }),
+            new Pregunta("6. ¿Java es fácil?", new Respuesta[] {
+                    new Respuesta("Sí", 'A', false),
+                    new Respuesta("No", 'B', true),
+                     }),
+            new Pregunta("7. Novia de Freddy", new Respuesta[] {
+                    new Respuesta("Domínguez", 'A', true),
+                    new Respuesta("Giovanna", 'B', false),
+                    new Respuesta("Yareth", 'C', false),
+                    new Respuesta("Lenni", 'D', false),
+            }),
+            new Pregunta("8. Pasatiempo favorito de Ángel Santos aka Catemaco", new Respuesta[] {
+                    new Respuesta("Hacer tarea", 'A', false),
+                    new Respuesta("Rezar", 'B', false),
+                    new Respuesta("Caguamear en las canchas", 'C', true),
+                    new Respuesta("Aprender de Java", 'D', false),
+                     }),
+            new Pregunta("9. Compañero más alucín", new Respuesta[] {
+                    new Respuesta("Omar", 'A', false),
+                    new Respuesta("Freddy", 'B', false),
+                    new Respuesta("Anael", 'C', false),
+                    new Respuesta("Tadeo", 'D', true), 
+            }),
+            new Pregunta("10. ¿Cuántas mujeres hay en el salón", new Respuesta[] {
+                    new Respuesta("3", 'A', false),
+                    new Respuesta("4", 'B', true),
+                    new Respuesta("2", 'C', false),
+                    new Respuesta("1", 'C', false),
+                     }),
+            new Pregunta("11. Portafolio de evidencias más difícil de realizar", new Respuesta[] {
+                    new Respuesta("Dionisio", 'A', false),
+                    new Respuesta("Ballesteros", 'B', true),
+                    new Respuesta("Mayra", 'C', false),
+            }),
+            new Pregunta("12. ¿Qué día es considerado <social> por el maestro Arroyo?", new Respuesta[] {
+                    new Respuesta("Lunes", 'A', false),
+                    new Respuesta("Martes", 'B', true),
+                    new Respuesta("Miércoles", 'C', false),
+                    new Respuesta("Jueves", 'D', false),
+                    new Respuesta("Viernes",'E', true),
+            }),
+            new Pregunta("13. Razón por la que el maestro Rogelio no haría algo", new Respuesta[] {
+                    new Respuesta("No quiere hacerlo", 'A', false),
+                    new Respuesta("Está cansado", 'B', false),
+                    new Respuesta("No sería ético", 'C', true),
+                    new Respuesta("No está de humor", 'D', false),
+            }),
+                
+        };
+
+        for (Pregunta p: preguntas) {
+            p.preguntar();
+        }
+    }
+}
+
+class Pregunta {
+    private String pregunta;
+    private Respuesta[] respuestasPosibles;
+    public Pregunta(String pregunta, Respuesta[] respuestasPosibles) {
+        this.pregunta = pregunta;
+        this.respuestasPosibles = respuestasPosibles;
+    }
+
+    public void preguntar() {
+        System.out.println(this.pregunta);
+        char letraCorrecta = 'A';
+        for (Respuesta opcion: this.respuestasPosibles) {
+            if (opcion.esCorrecta()) letraCorrecta = opcion.getLetra();
+            System.out.print(String.valueOf(opcion.getLetra()) + ")" + opcion.getRespuesta() + " ");
+        }
+        System.out.println("\nElige: ");
+        Scanner sc = new Scanner(System.in);
+        char letraElegidaPorElUsuario = sc.next().toUpperCase().charAt(0);
+        if (letraElegidaPorElUsuario == letraCorrecta)
+            System.out.println("Correcto");
+        else
+            System.out.println("Incorrecto, la respuesta correcta era " + String.valueOf(letraCorrecta));
+    }
+}
+
+class Respuesta {
+    private String respuesta;
+    private char letra;
+    private boolean correcta;
+
+    public Respuesta(String respuesta, char letra, boolean correcta) {
+        this.respuesta = respuesta;
+        this.letra = letra;
+        this.correcta = correcta;
+    }
+
+    public String getRespuesta() {
+        return this.respuesta;
+    }
+
+    public char getLetra() {
+        return this.letra;
+    }
+
+    public boolean esCorrecta() {
+        return this.correcta;
+    }
+
+}
